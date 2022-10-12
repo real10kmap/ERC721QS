@@ -30,11 +30,10 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     function getPartners(uint256 tokenId)
         private
         view
-        returns (address, address)
+        returns ( address)
     {
-        address ward = ownerOf(tokenId);
         address guard = guardianOf(tokenId);
-        return (ward, guard);
+        return ( guard);
     }
 
     /**
