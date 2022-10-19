@@ -41,7 +41,7 @@ describe("testERC721QS", () => {
     // connect to user wallet
     contractIns = contractIns.connect(user);
     // mint
-    await call("mint 5 个NFT", contractIns.connect(user).mint(5));
+    await call("mint five NFT", contractIns.connect(user).mint(5));
     // check balance
     expect(
       await (await contractIns.balanceOf(user.address)).toNumber(),
