@@ -11,7 +11,18 @@ category (*only required for Standards Track): ERC
 created	: 2022-9-01
 requires (*optional): 20, 165, 721
 ---
-
+---
+eip: 4907
+title: Rental NFT, an Extension of EIP-721
+description: Add a time-limited role with restricted permissions to EIP-721 tokens.
+author: Anders (@0xanders), Lance (@LanceSnow), Shrug <shrug@emojidao.org>
+discussions-to: https://ethereum-magicians.org/t/idea-erc-721-user-and-expires-extension/8572
+status: Final
+type: Standards Track
+category: ERC
+created: 2022-03-11
+requires: 165, 721
+---
 
 |eip|title|Description|Author|discussions-to|status|type|category|created|requires|
 |:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
