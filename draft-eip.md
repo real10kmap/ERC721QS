@@ -1,35 +1,22 @@
-
-eip
-
-title
-
-Guard of NFT/SBT，an Extension of EIP-721
-
-Description
-
-定义了一个新的NFT/SBT的管理角色，guard，实现了NFT/SBT的转移权和持有权的分离。
-
+---
+eip:
+title:Guard of NFT/SBT，an Extension of EIP-721
+Description:定义了一个新的NFT/SBT的管理角色，guard，实现了NFT/SBT的转移权和持有权的分离。
 A new management role of NFT/SBT is defined, which realizes the separation of transfer right and holding right of NFT/SBT.
-
 Author：
-
 discussions-to：
-
 status: Draft	
-
 type: Standards Track	
-
 category (*only required for Standards Track): ERC	
-
 created	: 2022-9-01
-
 requires (*optional): 20, 165, 721
+---
 
-Abstract(摘要)
+## Abstract(摘要)
 
 本标准是ERC721的扩展。它将NFT/SBT的持有权（holding right）和转移权(transfer right)分离，并新定义了一个角色， guard。guard设置的灵活性，使得NFT防盗、NFT借贷、NFT租赁和SBT等的设计成为可能。
 
-Motivation（动机）
+## Motivation（动机）
 
 NFT是一种兼具使用价值和金融价值的资产。
 
@@ -41,7 +28,7 @@ NFT是一种兼具使用价值和金融价值的资产。
 对于SBT。目前主流观点是认为SBT不可转移，这使得SBT与以太坊地址进行了绑定。但在使用者地址私钥泄露或丢失时，找回SBT将成为一个复杂的工作且没有相应的规范。SBT本质上也是实现了NFT的持有权和转移权的分离，当SBT所在钱包被盗或者不可用时，SBT应该可以被找回。
 另外，SBT使用中，仍然需要被管理。比如某大学给自己的毕业生发放了毕业证书SBT，而如果之后该大学发现某个毕业生学术不端或者危害了该大学的声誉，它应该具有收回毕业证书SBT的能力。
 
-Specification（规格）
+## Specification（规格）
 
 The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY" and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 
@@ -49,7 +36,7 @@ https://github.com/real10kmap/ERC721QS/blob/main/contracts/IERC721QS.sol
 
 xxxx(需要根据合约可能做的进一步解释)
 
-Rationale（基本原理）
+## Rationale（基本原理）
 
 权限分离的规范管理
 
@@ -91,20 +78,20 @@ As mentioned in the specifications section, this standard can be fully EIP-721 c
 
 In addition, new functions introduced in this standard have many similarities with the existing functions in EIP-721. This allows developers to easily adopt the standard quickly.
 
-Test Cases（测试用例）
+## Test Cases（测试用例）
 
 https://github.com/real10kmap/ERC721QS/tree/main/test 
 
-Reference Implementation（参考实现）
+## Reference Implementation（参考实现）
 
 https://github.com/real10kmap/ERC721QS/blob/main/contracts/ERC721QS.sol
 
-Security Considerations（安全注意事项）
+## Security Considerations（安全注意事项）
 
 当NFT具有guard时，如果owner对某合约进行了approve，合约依然无法对该NFT进行转移等操作。
 
 对于通过approve+签名进行交易的NFT交易平台（如OpenSea、LooksRare），NFT具有guard时，可以通过签名被挂单，但不可被交易。建议事前通过接口进行检查阻止此类挂单。
 
-Copyright（版权）
+## Copyright（版权）
 
 Copyright and related rights waived via CC0.
