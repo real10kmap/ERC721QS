@@ -1,4 +1,17 @@
 ---
+eip: xxx
+title: Guard of NFT/SBT，an Extension of EIP-721
+description: 定义了一个新的NFT/SBT的管理角色，guard，实现了NFT/SBT的转移权和持有权的分离。A new management role of NFT/SBT is defined, which realizes the separation of transfer right and holding right of NFT/SBT.
+author: xxx
+discussions-to: xxx
+status: Draft
+type: Standards Track
+category: ERC
+created: 2022-9-01
+requires: 20, 165, 721
+---
+
+---
 eip:
 title:Guard of NFT/SBT，an Extension of EIP-721
 Description:定义了一个新的NFT/SBT的管理角色，guard，实现了NFT/SBT的转移权和持有权的分离。
