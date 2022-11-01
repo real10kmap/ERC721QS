@@ -35,6 +35,8 @@ NFT是一种兼具使用价值和金融价值的资产。
 
 The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY" and "OPTIONAL" in this document are to be interpreted as described in RFC 2119.
 
+### Contract Interface
+
 https://github.com/real10kmap/ERC721QS/blob/main/contracts/IERC721QS.sol
 
 xxxx(需要根据合约可能做的进一步解释)
