@@ -14,7 +14,7 @@ requires (*optional): 20, 165, 721
 
 ## Abstract(摘要)
 
-本标准是ERC721的扩展。它将NFT/SBT的持有权（holding right）和转移权(transfer right)分离，并新定义了一个角色， guard。guard设置的灵活性，使得NFT防盗、NFT借贷、NFT租赁和SBT等的设计成为可能。
+本标准是ERC721的扩展。它将NFT/SBT的持有权（holding right）和转移权(transfer right)分离，并新定义了一个角色， `guard`。`guard`设置的灵活性，使得NFT防盗、NFT借贷、NFT租赁和SBT等的设计成为可能。
 
 ## Motivation（动机）
 
@@ -40,11 +40,11 @@ xxxx(需要根据合约可能做的进一步解释)
 
 权限分离的规范管理
 
-该标准定义了一个新的角色guard，并对owner和guard的权限进行了以下规范。
+该标准定义了一个新的角色`guard`，并对`owner`和`guard`的权限进行了以下规范。
 
-owner:当guard为空时，owner可以进行NFT的转移操作，也可以设置guard。但NFT已存在guard时，不经guard允许，owner无法修改guard，且无法对NFT进行转移操作。
+`owner`:当`guard`为空时，`owner`可以进行NFT的转移操作，也可以设置`guard`。但NFT已存在`guard`时，不经`guard`允许，`owner`无法修改`guard`，且无法对NFT进行转移操作。
 
-guard: 监护人，可以设置为NFT持有者的冷钱包地址，或者是NFT持有者信任的地址。guard可以自行移除（remove）自己的guard身份，或者在NFT所在的owner地址出现异常后，调用合约，将 NFT转移到指定的地址。
+`guard`: 监护人，可以设置为NFT持有者的冷钱包地址，或者是NFT持有者信任的地址。`guard`可以自行移除（remove）自己的`guard`身份，或者在NFT所在的`owner`地址出现异常后，调用合约，将 NFT转移到指定的地址。
 
 该标准的设计思想如下
 
@@ -54,11 +54,11 @@ NFT/SBT的应用场景很多，没必要为每个具体的应用场景提出专�
 
 例如，该标准有且不止有以下用例。
 
-SBT。在SBT mint前，即对SBT统一赋予指定的guard角色，那么SBT将不可被持有者转移，且SBT发行方可通过guard对SBT进行管理。
+SBT。在SBT mint前，即对SBT统一赋予指定的`guard`角色，那么SBT将不可被持有者转移，且SBT发行方可通过`guard`对SBT进行管理。
 
-NFT防盗。NFT持有者将该NFT的guard地址设置为自己的冷钱包地址，该NFT仍然可被NFT持有者使用，但被盗风险大大降低。
+NFT防盗。NFT持有者将该NFT的`guard`地址设置为自己的冷钱包地址，该NFT仍然可被NFT持有者使用，但被盗风险大大降低。
 
-NFT抵押借贷。借款人将guard设置为贷款人地址，借款人在获得借款的同时，仍具有该NFT的使用权，但同时无法转移或出售该NFT。如果借款人违约，贷款人可以对该NFT进行转移和出售。
+NFT抵押借贷。借款人将`guard`设置为贷款人地址，借款人在获得借款的同时，仍具有该NFT的使用权，但同时无法转移或出售该NFT。如果借款人违约，贷款人可以对该NFT进行转移和出售。
 
 简洁性
 
@@ -66,11 +66,11 @@ NFT抵押借贷。借款人将guard设置为贷款人地址，借款人在获得
 
 扩展性
 
-本标准仅定义了一个guard，对于NFT和SBT所需要的复杂功能，例如社交恢复、多签、时间管理，根据具体应用场景，可以将guard设置为第三方协议地址，通过第三方协议实现更加灵活多样的功能。
+本标准仅定义了一个`guard`，对于NFT和SBT所需要的复杂功能，例如社交恢复、多签、时间管理，根据具体应用场景，可以将`guard`设置为第三方协议地址，通过第三方协议实现更加灵活多样的功能。
 
 对名字的选择
 
-备选的名字有guardian和guard，它们都基本符合该角色对应的权限：对NFT进行保护或根据其应用场景进行必要的管理。而guard字符数少于guardian，更加简洁。
+备选的名字有`guardian`和`guard`，它们都基本符合该角色对应的权限：对NFT进行保护或根据其应用场景进行必要的管理。而`guard`字符数少于`guardian`，更加简洁。
 
 Backwards Compatibility（向后兼容性）
 
@@ -88,9 +88,9 @@ https://github.com/real10kmap/ERC721QS/blob/main/contracts/ERC721QS.sol
 
 ## Security Considerations（安全注意事项）
 
-当NFT具有guard时，如果owner对某合约进行了approve，合约依然无法对该NFT进行转移等操作。
+当NFT具有`guard`时，如果`owner`对某合约进行了`approve`，合约依然无法对该NFT进行转移等操作。
 
-对于通过approve+签名进行交易的NFT交易平台（如OpenSea、LooksRare），NFT具有guard时，可以通过签名被挂单，但不可被交易。建议事前通过接口进行检查阻止此类挂单。
+对于通过`approve`+签名进行交易的NFT交易平台（如OpenSea、LooksRare），NFT具有`guard`时，可以通过签名被挂单，但不可被交易。建议事前通过接口进行检查阻止此类挂单。
 
 ## Copyright（版权）
 
