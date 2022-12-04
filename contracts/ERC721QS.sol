@@ -4,16 +4,17 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./IERC721QS.sol";
 
+
 abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
-    struct Guardian {
-        address guardianAddr;
+    struct Guard {
+        address guardAddr;
     }
 
     // mapping the relationship of tokenId -> guard
     mapping(uint256 => address) private token_guard_map;
 
     function checkOnlyGuard(uint256 tokenId) internal view returns (address) {
-        address guard = guardianOf(tokenId);
+        address guard = guardOf(tokenId);
         address sender = _msgSender();
         if (guard != address(0)) {
             require(guard == sender, "sender is not guard of token");
@@ -21,72 +22,72 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         }else{
             return address(0);
         }
-       
+
     }
 
-    event UpdateGuardianOfToken(
+    event UpdateGuardOfToken(
         uint256 tokenId,
         address newGuard,
         address oldGuard
     );
 
-    // Get Token Guardian
+    // Get Token Guard
     function getPartners(uint256 tokenId)
         private
         view
         returns (address)
     {
-        address guard = guardianOf(tokenId);
+        address guard = guardOf(tokenId);
         return (guard);
     }
-    
-    //Get Token Guardian
-    function guardianOf(uint256 tokenId) public view returns (address) {
+
+    //Get Token Guard
+    function guardOf(uint256 tokenId) public view returns (address) {
         return token_guard_map[tokenId];
     }
 
     // Edit Token Guardian
-    function updateGuardianForToken(
+    function updateGuard(
         uint256 tokenId,
         address newGuard,
         bool allowNull
     ) internal {
-        address guard = guardianOf(tokenId);
+        address guard = guardOf(tokenId);
         if (!allowNull) {
-            require(newGuard != address(0), "new guardian can not be null");
+            require(newGuard != address(0), "new guard can not be null");
         }
         // Update guard for token
         if (guard != address(0)) {
             require(guard == _msgSender(), "only guard can change it self");
-        } 
+        }
 
         if (guard != address(0) || newGuard != address(0)) {
             token_guard_map[tokenId] = newGuard;
-            emit UpdateGuardianOfToken(tokenId, newGuard, guard);
+            emit UpdateGuardOfToken(tokenId, newGuard, guard);
         }
     }
 
-    function _simpleRemoveGuardian(uint256 tokenId) internal {
+    function _simpleRemoveGuard(uint256 tokenId) internal {
         token_guard_map[tokenId] = address(0);
     }
 
     // Edit Token Guardian
-    function changeGuardianForToken(uint256 tokenId, address newGuard)
+    function changeGuard(uint256 tokenId, address newGuard)
         public
         virtual
         override
     {
-        updateGuardianForToken(tokenId, newGuard, false);
+        updateGuard(tokenId, newGuard, false);
     }
 
     // remove token guardian
-    function removeGuardianForToken(uint256 tokenId) public virtual override {
-        updateGuardianForToken(tokenId, address(0), true);
+    function removeGuard(uint256 tokenId) public virtual override {
+        updateGuard(tokenId, address(0), true);
     }
 
 
     function findBack(uint256 tokenId) public virtual override {
-        address _guard = guardianOf(tokenId);
+        address _guard = guardOf(tokenId);
         if (_guard != address(0)) {
             require(_guard == msg.sender, "sender is not guard!");
         }
@@ -102,7 +103,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         if (from != address(0)) {
             guard = checkOnlyGuard(tokenId);
             new_from = ownerOf(tokenId);
-            _simpleRemoveGuardian(tokenId);
+            _simpleRemoveGuard(tokenId);
         }
         if (guard == address(0)) {
             require(
@@ -124,7 +125,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         if (from != address(0)) {
             guard = checkOnlyGuard(tokenId);
             new_from = ownerOf(tokenId);
-            removeGuardianForToken(tokenId);
+            removeGuard(tokenId);
         }
         if (guard == address(0)) {
             require(
