@@ -5,12 +5,12 @@
 interface iERC721QS {
 
     /**
-     * @dev Update the guardian of tokenid
+     * @dev Update the Guard of tokenid
      *
      * Requirements:
      *
-     * - `guard` is null.
-     * - `guard` cannot be the zero address.
+     * - `Guard` is null.
+     * - `Guard` cannot be the zero address.
      * - `tokenId` token must exist and be owned by `from`.
      */
     function changeGuard(uint256 tokenId, address newGuard) external;
@@ -21,8 +21,8 @@ interface iERC721QS {
      *
      * Requirements:
      *
-     * - `guard` is not be null.
-     * - `guard` must be self.
+     * - `Guard` is not be null.
+     * - `Guard` must be self.
      * - `tokenId` token must exist and be owned by `from`.
      */
     function removeGuard(uint256 tokenId) external;
@@ -33,7 +33,7 @@ interface iERC721QS {
      *
      * Requirements:
      *
-     * - Only guardians can call.
+     * - Only Guard can call.
     */
     function findBack(uint256 tokenId) external;
 }
