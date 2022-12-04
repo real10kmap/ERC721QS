@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "./IERC721QS.sol";
 
 
+
 abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     struct Guard {
         address guardAddr;
