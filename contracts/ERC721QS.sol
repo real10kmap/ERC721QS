@@ -11,7 +11,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         address guardAddr;
     }
 
-    // mapping the relationship of tokenId -> guard
+    // mapping the relationship of tokenId -> Guard
     mapping(uint256 => address) private token_guard_map;
 
     function checkOnlyGuard(uint256 tokenId) internal view returns (address) {
@@ -26,7 +26,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
 
     }
 
-    event UpdateGuardOfToken(
+    event updateGuardLog(
         uint256 tokenId,
         address newGuard,
         address oldGuard
@@ -64,7 +64,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
 
         if (guard != address(0) || newGuard != address(0)) {
             token_guard_map[tokenId] = newGuard;
-            emit UpdateGuardOfToken(tokenId, newGuard, guard);
+            emit updateGuardLog(tokenId, newGuard, guard);
         }
     }
 
