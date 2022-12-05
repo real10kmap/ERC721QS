@@ -1,8 +1,8 @@
 ---
-eip: xxx
+eip: <to be assigned>
 title: Guard of NFT/SBT，an Extension of EIP-721
 description: 定义了一个新的NFT/SBT的管理角色，guard，实现了NFT/SBT的转移权和持有权的分离。A new management role of NFT/SBT is defined, which realizes the separation of transfer right and holding right of NFT/SBT.
-author: xxx
+author: 5660.eth
 discussions-to: xxx
 status: Draft
 type: Standards Track
@@ -23,9 +23,9 @@ NFT是一种兼具使用价值和金融价值的资产。
 
 在当前NFT抵押借贷中，NFT所有者需要将NFT转入抵押借贷合约，而NFT所有者虽然获得了借款，但不再具有使用权。而在现实世界中，比如一个人以自己的房产进行了抵押贷款，他仍然具有该房产的使用权。
 
-（当前也有一些对于NFT租赁的解决方案，但对目前的已有的应用协议不够兼容。例如，在eip4907中，一个地址租用了一个NFT，目前无法在NFT查看平台（例如OpenSea）直接看到该地址的租用的NFT。该租赁协议需要得到应用协议主动认可，此租赁才能生效。
+当前也有一些对于NFT租赁的解决方案，但对目前的已有的应用协议不够兼容。例如，在eip4907中，一个地址租用了一个NFT，目前无法在NFT查看平台（例如OpenSea）直接看到该地址的租用的NFT。该租赁协议需要得到应用协议主动认可，此租赁才能生效。
 
-此外，对于目前的NFT分期付款，只有当购买者付完全款后，购买者才能够获得该NFT使用权，在此之前，NFT依然在销售者钱包或者托管合约中。而现实世界中，例如你分期付款购买了一部手机，你将立刻获得手机使用权。）
+此外，对于目前的NFT分期付款，只有当购买者付完全款后，购买者才能够获得该NFT使用权，在此之前，NFT依然在销售者钱包或者托管合约中。而现实世界中，例如你分期付款购买了一部手机，你将立刻获得手机使用权。
 
 对于SBT。目前主流观点是认为SBT不可转移，这使得SBT与以太坊地址进行了绑定。但在使用者地址私钥泄露或丢失时，找回SBT将成为一个复杂的工作且没有相应的规范。SBT本质上也是实现了NFT的持有权和转移权的分离，当SBT所在钱包被盗或者不可用时，SBT应该可以被找回。
 
@@ -39,7 +39,6 @@ The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SH
 
 https://github.com/real10kmap/ERC721QS/blob/main/contracts/IERC721QS.sol
 
-xxxx(需要根据合约可能做的进一步解释)
 
 ## Rationale（基本原理）
 
