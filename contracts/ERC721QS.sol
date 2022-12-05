@@ -49,14 +49,18 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         address newGuard,
         bool allowNull
     ) internal {
+        address ward = ownerOf(tokenId); 
         address guard = guardOf(tokenId);
         if (!allowNull) {
             require(newGuard != address(0), "New guard can not be null");
         }
         // Update guard for token
-        if (guard != address(0)) {
-            require(guard == _msgSender(), "Only guard can change it self");
-        }
+       
+         if (guard != address(0)) { 
+            require(guard == _msgSender(), "only guard can change it self"); 
+        } else { 
+            require(ward == _msgSender(), "only owner can set guard"); 
+        } 
 
         if (guard != address(0) || newGuard != address(0)) {
             token_guard_map[tokenId] = newGuard;
