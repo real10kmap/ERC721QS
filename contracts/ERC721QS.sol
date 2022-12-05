@@ -81,15 +81,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     function removeGuard(uint256 tokenId) public virtual override {
         updateGuard(tokenId, address(0), true);
     }
-    
-    ///TODO
-    function findBack(uint256 tokenId) public virtual override {
-        address _guard = guardOf(tokenId);
-        if (_guard != address(0)) {
-            require(_guard == msg.sender, "Sender is not guard!");
-        }
-    }
-
+ 
     /// @notice transfer NFT 
     /// @dev    Before transferring the token, you need to check the gurard address
     /// Throws  if `tokenId` is not valid NFT
