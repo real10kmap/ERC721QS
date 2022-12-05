@@ -4,6 +4,12 @@
 
 interface iERC721QS {
 
+    event updateGuardLog(
+        uint256 tokenId,
+        address newGuard,
+        address oldGuard
+    );
+    
     /**
      * @dev Update the Guard of tokenid
      *
@@ -36,4 +42,6 @@ interface iERC721QS {
      * - Only Guard can call.
     */
     function findBack(uint256 tokenId) external;
+   
+   
 }
