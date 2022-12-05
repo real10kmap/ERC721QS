@@ -11,9 +11,13 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         address guardAddr;
     }
 
-    // mapping the relationship of tokenId -> Guard
+    /// mapping the relationship of tokenId -> Guard
     mapping(uint256 => address) private token_guard_map;
 
+    /// @notice Verify the Guard address
+    /// @dev    The zero address indicates there is no user
+    /// Throws if `tokenId` is not valid NFT
+    /// @param The NFT tokenId
     function checkOnlyGuard(uint256 tokenId) internal view returns (address) {
         address guard = guardOf(tokenId);
         address sender = _msgSender();
@@ -26,28 +30,20 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
 
     }
 
-    event updateGuardLog(
-        uint256 tokenId,
-        address newGuard,
-        address oldGuard
-    );
-
-    // Get Token Guard
-    function getPartners(uint256 tokenId)
-        private
-        view
-        returns (address)
-    {
-        address guard = guardOf(tokenId);
-        return (guard);
-    }
-
-    //Get Token Guard
+    /// @notice Returns the set gurard address
+    /// @dev    return Guard address
+    /// Throws if `tokenId` is not valid NFT
+    /// @param The NFT tokenId
     function guardOf(uint256 tokenId) public view returns (address) {
         return token_guard_map[tokenId];
     }
 
-    // Edit Token Guardian
+    /// @notice Edit Token Guard
+    /// @dev    
+    /// Throws if `tokenId` is not valid NFT
+    /// @param tokenId The NFT to get the user address for
+    /// @param The newGuard address
+    /// @param 
     function updateGuard(
         uint256 tokenId,
         address newGuard,
@@ -55,11 +51,11 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     ) internal {
         address guard = guardOf(tokenId);
         if (!allowNull) {
-            require(newGuard != address(0), "new guard can not be null");
+            require(newGuard != address(0), "New guard can not be null");
         }
         // Update guard for token
         if (guard != address(0)) {
-            require(guard == _msgSender(), "only guard can change it self");
+            require(guard == _msgSender(), "Only guard can change it self");
         }
 
         if (guard != address(0) || newGuard != address(0)) {
@@ -72,28 +68,34 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         token_guard_map[tokenId] = address(0);
     }
 
-    // Edit Token Guardian
-    function changeGuard(uint256 tokenId, address newGuard)
-        public
-        virtual
-        override
+    // Edit Token Guard
+    function changeGuard(uint256 tokenId, address newGuard) public virtual override
     {
         updateGuard(tokenId, newGuard, false);
     }
 
-    // remove token guardian
+    /// @notice remove token Guard
+    /// @dev    The guard management address is set to 0 address
+    /// Throws  if `tokenId` is not valid NFT
+    /// @param  tokenId The NFT tokenId
     function removeGuard(uint256 tokenId) public virtual override {
         updateGuard(tokenId, address(0), true);
     }
-
-
+    
+    ///TODO
     function findBack(uint256 tokenId) public virtual override {
         address _guard = guardOf(tokenId);
         if (_guard != address(0)) {
-            require(_guard == msg.sender, "sender is not guard!");
+            require(_guard == msg.sender, "Sender is not guard!");
         }
     }
 
+    /// @notice transfer NFT 
+    /// @dev    Before transferring the token, you need to check the gurard address
+    /// Throws  if `tokenId` is not valid NFT
+    /// @param  address from The address of NFT user
+    /// @param  address to The address of NFT recipient 
+    /// @param  tokenId The NFT to get the user address for
     function transferFrom(
         address from,
         address to,
@@ -115,6 +117,13 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         _transfer(new_from, to, tokenId);
     }
 
+    /// @notice safe transfer NFT
+    /// @dev    Before transferring the token, you need to check the gurard address
+    /// Throws  if `tokenId` is not valid NFT
+    /// @param  address from The address of NFT user
+    /// @param  address to The address of NFT recipient 
+    /// @param  tokenId The NFT to get the user address for
+    /// @param  _data The NFT to get the user address for
     function safeTransferFrom(
         address from,
         address to,
