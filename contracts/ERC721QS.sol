@@ -39,11 +39,11 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     }
 
     /// @notice Edit Token Guard
-    /// @dev    
-    /// Throws if `tokenId` is not valid NFT
+    /// @dev    Delete function: set guard  to 0 address,update function: set guard to new address
+    /// Throws If `tokenId` is not valid NFT
     /// @param tokenId The NFT to get the user address for
     /// @param The newGuard address
-    /// @param 
+    /// @param Allow 0 address
     function updateGuard(
         uint256 tokenId,
         address newGuard,
@@ -68,7 +68,10 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         token_guard_map[tokenId] = address(0);
     }
 
-    // Edit Token Guard
+    /// @notice Set Guard as the new address
+    /// @dev    
+    /// @param tokenId The NFT to get the user address for
+    /// @param The newGuard address
     function changeGuard(uint256 tokenId, address newGuard) public virtual override
     {
         updateGuard(tokenId, newGuard, false);
@@ -115,7 +118,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     /// @param  address from The address of NFT user
     /// @param  address to The address of NFT recipient 
     /// @param  tokenId The NFT to get the user address for
-    /// @param  _data The NFT to get the user address for
+    /// @param  _data 
     function safeTransferFrom(
         address from,
         address to,
@@ -138,6 +141,10 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
         _safeTransfer(from, to, tokenId, _data);
     }
 
+    /// @notice Authorization verification
+    /// @dev    Add guard verification based on the original authorization verification
+    /// @param  address to The address of NFT recipient  verification
+    /// @param  tokenId The NFT to get the user address for
     function approve(address to, uint256 tokenId) public virtual override {
         checkOnlyGuard(tokenId);
         address owner = ERC721.ownerOf(tokenId);
