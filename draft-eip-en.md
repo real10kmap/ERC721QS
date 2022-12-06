@@ -40,40 +40,41 @@ The keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SH
   
 ```solidity
 
-interface iERC721QS {
+interface IERC721QS {
 
-    /**
-     * @dev Update the Guard of tokenid
-     *
-     * Requirements:
-     *
-     * - `Guard` is null.
-     * - `Guard` cannot be the zero address.
-     * - `tokenId` token must exist and be owned by `from`.
-     */
+    /// Logged when the guard of an NFT is changed 
+    /// @notice Emitted when  the `guard` is changed
+    /// The zero address for guard indicates that there is no guard address
+    event updateGuardLog(uint256 tokenId,address newGuard,address oldGuard);
+    
+    /// @notice  Owner sets guard or guard modifies guard
+    /// @dev The newGuard can not be zero address
+    /// Throws if `tokenId` is not valid NFT
+    /// @param tokenId The NFT to get the guard address for
+    /// @param newGuard The new guard address of the NFT
     function changeGuard(uint256 tokenId, address newGuard) external;
 
   
-    /**
-     * @dev Remove the guard of a token
-     *
-     * Requirements:
-     *
-     * - `Guard` is not be null.
-     * - `Guard` must be self.
-     * - `tokenId` token must exist and be owned by `from`.
-     */
+    /// @notice Remove the guard of an NFT
+    /// @dev The guard address is set to 0 address
+    /// @dev Only guard can remove its own guard role
+    /// Throws  if `tokenId` is not valid NFT
+    /// @param tokenId The NFT to remove the guard address for
     function removeGuard(uint256 tokenId) external;
+    
+    /// @notice Transfer the NFT and remove its own guard role
+    /// Throws  if `tokenId` is not valid NFT
+    /// @param  from  The address of the previous owner of the NFT
+    /// @param  to  The address of NFT recipient 
+    /// @param  tokenId The NFT to get transferred for
+    function removeGuardAndTransfer(address from,address to,uint256 tokenId) external;
 
-
-    /**
-     * @dev Retrieve user's assets
-     *
-     * Requirements:
-     *
-     * - Only Guard can call.
-    */
-    function findBack(uint256 tokenId) external;
+    /// @notice Get the guard address of an NFT
+    /// @dev The zero address indicates that there is no guard
+    /// Throws if `tokenId` is not valid NFT
+    /// @param tokenId The NFT to get the guard address for
+    /// @return The guard address for this NFT
+   function guardOf(uint256 tokenId) external view returns (address);   
 }
   ```
 
