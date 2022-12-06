@@ -6,7 +6,7 @@ import "./IERC721QS.sol";
 
 
 
-abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
+abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
 
     /// mapping the relationship of tokenId -> Guard
     mapping(uint256 => address) private token_guard_map;
@@ -89,7 +89,7 @@ abstract contract ERC721QS is ERC721Enumerable, iERC721QS {
     /// @param  from  The address of the previous owner of the NFT
     /// @param  to  The address of NFT recipient 
     /// @param  tokenId The NFT to get transferred for
-    function removeGuardAndTransfer(address from,address to,uint256 tokenId) public pure {
+    function removeGuardAndTransfer(address from,address to,uint256 tokenId) public {
         transferFrom(from,to,tokenId);
         removeGuard(tokenId);
     }
