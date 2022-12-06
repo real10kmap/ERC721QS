@@ -124,6 +124,7 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
         }
         _safeTransfer(from, to, tokenId, _data);
     }
+    
     /// @dev See {IERC165-supportsInterface}.
     function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
         return interfaceId == type(IERC721QS).interfaceId || super.supportsInterface(interfaceId);
