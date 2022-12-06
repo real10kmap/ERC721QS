@@ -42,11 +42,7 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
     /// @param tokenId The NFT to update the guard address for
     /// @param newGuard The newGuard address
     /// @param allowNull Allow 0 address
-    function updateGuard(
-        uint256 tokenId,
-        address newGuard,
-        bool allowNull
-    ) internal {
+    function updateGuard(uint256 tokenId,address newGuard,bool allowNull) internal {
         address owner = ownerOf(tokenId); 
         address guard = guardOf(tokenId);
         if (!allowNull) {
@@ -100,11 +96,7 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
     /// @param  from  The address of the previous owner of the NFT
     /// @param  to  The address of NFT recipient 
     /// @param  tokenId The NFT to get transferred for
-    function transferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public virtual override {
+    function transferFrom(address from,address to,uint256 tokenId) public virtual override {
         address guard;
         address new_from = from;
         if (from != address(0)) {
@@ -127,12 +119,7 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
     /// @param  to  The address of NFT recipient 
     /// @param  tokenId The NFT to get transferred for
     /// @param  _data XXX
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes memory _data
-    ) public virtual override {
+    function safeTransferFrom(address from,address to,uint256 tokenId,bytes memory _data) public virtual override {
         address guard;
         address new_from = from;
         if (from != address(0)) {
@@ -147,4 +134,4 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
         }
         _safeTransfer(from, to, tokenId, _data);
     }
-
+}
