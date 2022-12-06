@@ -79,16 +79,6 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
     function removeGuard(uint256 tokenId) public virtual override {
         updateGuard(tokenId, address(0), true);
     }
-    
-    /// @notice Transfer the NFT and remove its own guard role
-    /// Throws  if `tokenId` is not valid NFT
-    /// @param  from  The address of the previous owner of the NFT
-    /// @param  to  The address of NFT recipient 
-    /// @param  tokenId The NFT to get transferred for
-    function removeGuardAndTransfer(address from,address to,uint256 tokenId) public {
-        transferFrom(from,to,tokenId);
-        removeGuard(tokenId);
-    }
  
     /// @notice Transfers `tokenId` NFT from `from` to `to`
     /// @dev    Before transferring the NFT, need to check the gurard address
@@ -133,5 +123,9 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
             );
         }
         _safeTransfer(from, to, tokenId, _data);
+    }
+    /// @dev See {IERC165-supportsInterface}.
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(IERC721QS).interfaceId || super.supportsInterface(interfaceId);
     }
 }
