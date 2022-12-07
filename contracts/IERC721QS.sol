@@ -19,7 +19,7 @@ interface IERC721QS {
   
     /// @notice Remove the guard of an NFT
     /// @dev The guard address is set to 0 address
-    /// @dev Only guard can remove its own guard role
+    /// Only guard can remove its own guard role
     /// Throws  if `tokenId` is not valid NFT
     /// @param tokenId The NFT to remove the guard address for
     function removeGuard(uint256 tokenId) external;
