@@ -54,17 +54,7 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
     function removeGuard(uint256 tokenId) public virtual override {
         updateGuard(tokenId, address(0), true);
     }
-    
-    /// @notice Transfer the NFT and remove its guard role
-    /// Throws  if `tokenId` is not valid NFT
-    /// @param  from  The address of the previous owner of the NFT
-    /// @param  to  The address of NFT recipient 
-    /// @param  tokenId The NFT to get transferred for
-    function transferAndRemove(address from,address to,uint256 tokenId) public {
-        transferFrom(from,to,tokenId);
-        removeGuard(tokenId);
-    }
-    
+       
     /// @notice Get the guard address of an NFT
     /// @dev The zero address indicates that there is no guard
     /// Throws if `tokenId` is not valid NFT
@@ -74,6 +64,15 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
         return token_guard_map[tokenId];
     }
     
+    /// @notice Transfer the NFT and remove its guard role
+    /// Throws  if `tokenId` is not valid NFT
+    /// @param  from  The address of the previous owner of the NFT
+    /// @param  to  The address of NFT recipient 
+    /// @param  tokenId The NFT to get transferred for
+    function transferAndRemove(address from,address to,uint256 tokenId) public {
+        transferFrom(from,to,tokenId);
+        removeGuard(tokenId);
+    }   
     
     /// @notice Check the guard address
     /// @dev    The zero address indicates there is no guard
