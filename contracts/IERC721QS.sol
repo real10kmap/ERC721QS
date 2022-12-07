@@ -7,7 +7,7 @@ interface IERC721QS {
     /// Logged when the guard of an NFT is changed 
     /// @notice Emitted when  the `guard` is changed
     /// The zero address for guard indicates that there is no guard address
-    event updateGuardLog(uint256 tokenId,address newGuard,address oldGuard);
+    event UpdateGuardLog(uint256 tokenId,address newGuard,address oldGuard);
     
     /// @notice  Owner sets guard or guard modifies guard
     /// @dev The newGuard can not be zero address
