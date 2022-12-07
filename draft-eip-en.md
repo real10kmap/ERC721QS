@@ -2,7 +2,7 @@
 eip: <to be assigned>
 title: Guard of NFT/SBT, an Extension of EIP-721
 description: A new management role of NFT/SBT is defined, which realizes the separation of transfer right and holding right of NFT/SBT.
-author: 5660.eth<5660@10kuni.io>
+author: 5660.eth<5660@10kuni.io>,Wizard Wang
 discussions-to: xxx
 status: Draft
 type: Standards Track
