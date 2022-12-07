@@ -79,7 +79,7 @@ interface IERC721QS {
   
   ```
 
-The `supportsInterface` method MUST return `true` when called with `0x...`.
+The `supportsInterface` method MUST return `true` when called with `0xc0655ef1`.
 
 ### Rationale 
 
