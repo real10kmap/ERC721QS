@@ -127,6 +127,7 @@ If the NFT issued based on the above standard does not have a `guard` role, then
 ## Reference Implementation
   
 ```solidity
+  
 // SPDX-License-Identifier: CC0-1.0
 pragma solidity ^0.8.0;
 
@@ -139,31 +140,6 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
 
     /// mapping the relationship of tokenId -> Guard
     mapping(uint256 => address) private token_guard_map;
-
-    /// @notice Check the guard address
-    /// @dev    The zero address indicates there is no guard
-    /// Throws if `tokenId` is not valid NFT
-    /// @param tokenId The NFT to check the guard address for
-    /// @return The guard address
-    function checkOnlyGuard(uint256 tokenId) internal view returns (address) {
-        address guard = guardOf(tokenId);
-        address sender = _msgSender();
-        if (guard != address(0)) {
-            require(guard == sender, "sender is not guard of token");
-            return guard;
-        }else{
-            return address(0);
-        }
-    }
-
-    /// @notice Get the guard address of an NFT
-    /// @dev The zero address indicates that there is no guard
-    /// Throws if `tokenId` is not valid NFT
-    /// @param tokenId The NFT to get the guard address for
-    /// @return The guard address for this NFT
-    function guardOf(uint256 tokenId) public view returns (address) {
-        return token_guard_map[tokenId];
-    }
 
     /// @notice Update guard of NFT
     /// @dev    Delete function: set guard  to 0 address,update function: set guard to new address
@@ -217,6 +193,32 @@ abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
     function transferAndRemove(address from,address to,uint256 tokenId) public {
         transferFrom(from,to,tokenId);
         removeGuard(tokenId);
+    }
+    
+    /// @notice Get the guard address of an NFT
+    /// @dev The zero address indicates that there is no guard
+    /// Throws if `tokenId` is not valid NFT
+    /// @param tokenId The NFT to get the guard address for
+    /// @return The guard address for this NFT
+    function guardOf(uint256 tokenId) public view returns (address) {
+        return token_guard_map[tokenId];
+    }
+    
+    
+    /// @notice Check the guard address
+    /// @dev    The zero address indicates there is no guard
+    /// Throws if `tokenId` is not valid NFT
+    /// @param tokenId The NFT to check the guard address for
+    /// @return The guard address
+    function checkOnlyGuard(uint256 tokenId) internal view returns (address) {
+        address guard = guardOf(tokenId);
+        address sender = _msgSender();
+        if (guard != address(0)) {
+            require(guard == sender, "sender is not guard of token");
+            return guard;
+        }else{
+            return address(0);
+        }
     }
  
     /// @notice Transfers `tokenId` NFT from `from` to `to`
