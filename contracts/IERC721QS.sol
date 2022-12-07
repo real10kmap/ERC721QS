@@ -24,12 +24,12 @@ interface IERC721QS {
     /// @param tokenId The NFT to remove the guard address for
     function removeGuard(uint256 tokenId) external;
     
-    /// @notice Transfer the NFT and remove its own guard role
+    /// @notice Transfer the NFT and remove its guard role
     /// Throws  if `tokenId` is not valid NFT
     /// @param  from  The address of the previous owner of the NFT
     /// @param  to  The address of NFT recipient 
     /// @param  tokenId The NFT to get transferred for
-    function removeGuardAndTransfer(address from,address to,uint256 tokenId) external;
+    function transferAndRemove(address from,address to,uint256 tokenId) external;
 
     /// @notice Get the guard address of an NFT
     /// @dev The zero address indicates that there is no guard
