@@ -6,7 +6,7 @@ import "./IERC721QS.sol";
 
 abstract contract ERC721QS is ERC721Enumerable, IERC721QS {
 
-    mapping(uint256 => address) private token_guard_map;
+    mapping(uint256 => address) internal token_guard_map;
 
     /// @notice Update the guard of the NFT
     /// @dev Delete function: set guard  to 0 address,update function: set guard to new address
